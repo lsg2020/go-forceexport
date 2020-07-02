@@ -89,8 +89,11 @@ code pointer with the desired one.
 Needless to say, it's a scary hack, but it seems to work!
 
 ## Thanks
+
 https://github.com/alangpierce/go-forceexport
+
 https://github.com/linux4life798/go-forceexport
+
 https://github.com/zhuzhengyang/go-forceexport
 
 ## License
