@@ -12,7 +12,7 @@ func FuncName(f interface{}) string {
 
 func aTestTimeNow(t *testing.T) {
 	var timeNowFunc func() (int64, int32)
-	GetFunc(&timeNowFunc, "time.now")
+	_ = GetFunc(&timeNowFunc, "time.now")
 	sec, nsec := timeNowFunc()
 	if sec == 0 || nsec == 0 {
 		t.Error("Expected nonzero result from time.now().")
@@ -79,6 +79,6 @@ func TestInvalidFunc(t *testing.T) {
 func BenchmarkGetMain(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		var main_init func()
-		GetFunc(&main_init, "main.main")
+		_ = GetFunc(&main_init, "main.main")
 	}
 }
