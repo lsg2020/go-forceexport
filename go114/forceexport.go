@@ -70,6 +70,19 @@ func FindFuncWithName(name string) (uintptr, error) {
 	return 0, fmt.Errorf("Invalid function name: %s", name)
 }
 
+func GetAllFuncName() (names []string) {
+	for moduleData := &Firstmoduledata; moduleData != nil; moduleData = moduleData.next {
+		for _, ftab := range moduleData.ftab {
+			f := (*runtime.Func)(unsafe.Pointer(&moduleData.pclntable[ftab.funcoff]))
+			funcName, err := getFuncName(f)
+			if err == nil {
+				names = append(names, funcName)
+			}
+		}
+	}
+	return
+}
+
 // Everything below is taken from the runtime package, and must stay in sync
 // with it.
 

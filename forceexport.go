@@ -62,3 +62,17 @@ func FindFuncWithName(name string) (p uintptr, err error) {
 	}
 	return
 }
+
+// GetAllFuncName returns all function names from the moduledata table. It's used for debug.
+// When you got
+func GetAllFuncName() (names []string) {
+	switch GoVersion {
+	case "go1.14", "go1.15":
+		names = go114.GetAllFuncName()
+	case "go1.16":
+		names = go116.GetAllFuncName()
+	default:
+		panic("Not suitable for " + GoVersion)
+	}
+	return
+}
