@@ -237,6 +237,22 @@ func getFuncName(f *runtime.Func) (funcName string, err error) {
 			}
 		}
 	}()
+
+	// (*Func).Name() assumes that the *Func was created by some exported
+	// method that would have returned a nil *Func pointer IF the
+	// desired function's datap resolves to nil.
+	// (a.k.a. if findmoduledatap(pc) returns nil)
+	// Since the last element of the moduleData.ftab has a datap of nil
+	// (from experimentation), .Name() Seg Faults on the last element.
+	//
+	// If we instead ask the external function FuncForPc to fetch
+	// our *Func object, it will check the datap first and give us
+	// a proper nil *Func, that .Name() understands.
+	// The down side of doing this is that internally, the
+	// findmoduledatap(pc) function is called twice for every element
+	// we loop over.
+	f = runtime.FuncForPC(f.Entry())
+
 	funcName = f.Name()
 	return funcName, err
 }
