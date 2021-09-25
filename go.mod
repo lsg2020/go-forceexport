@@ -1,3 +1,3 @@
-module github.com/AlaxLee/go-forceexport
+module github.com/lsg2020/go-forceexport
 
 go 1.14

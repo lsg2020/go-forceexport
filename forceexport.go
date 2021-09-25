@@ -1,8 +1,8 @@
 package forceexport
 
 import (
-	go114 "github.com/AlaxLee/go-forceexport/go114"
-	go116 "github.com/AlaxLee/go-forceexport/go116"
+	go114 "github.com/lsg2020/go-forceexport/go114"
+	go116 "github.com/lsg2020/go-forceexport/go116"
 	"regexp"
 	"runtime"
 )
